@@ -4,6 +4,7 @@ import (
 	"errors"
 	"fmt"
 	"math/rand"
+	"os"
 	"path"
 	"runtime"
 	"sync"
@@ -122,7 +123,8 @@ func benchmark(engine string, dir string, numKeys int, minKS int, maxKS int, min
 	}
 	endsecs := time.Since(start).Seconds()
 	totalalsecs := endsecs
-	fmt.Printf("Put: %.3f sec, %d ops/sec\n", endsecs, int(float64(numKeys)/endsecs))
+	writeNums := int(float64(numKeys) / endsecs)
+	fmt.Printf("Put: %.3f sec, %d ops/sec\n", endsecs, writeNums)
 
 	shuffle(keys)
 	db, err = ctr(dbpath)
@@ -152,13 +154,24 @@ func benchmark(engine string, dir string, numKeys int, minKS int, maxKS int, min
 	}
 	endsecs = time.Since(start).Seconds()
 	totalalsecs += endsecs
-	fmt.Printf("Get: %.3f sec, %d ops/sec\n", endsecs, int(float64(numKeys)/endsecs))
+	readNums := int(float64(numKeys) / endsecs)
+	fmt.Printf("Get: %.3f sec, %d ops/sec\n", endsecs, readNums)
 	fmt.Printf("Put + Get time: %.3f sec\n", totalalsecs)
 	sz, err := db.FileSize()
 	if err != nil {
 		return err
 	}
 	fmt.Printf("File size: %s\n", byteSize(sz))
+
+	f, err := os.OpenFile("results.csv", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+	if err != nil {
+		return err
+	}
+	defer f.Close()
+	csvResult := fmt.Sprintf("%s,%d,%d,%d~%d,%d~%d,%d,%d,%s,%.3f\n", engine, concurrency, numKeys, minKS, maxKS, minVS, maxVS, writeNums, readNums, byteSize(sz), totalalsecs)
+	if _, err := f.WriteString(csvResult); err != nil {
+		return err
+	}
 
 	return db.Close()
 }

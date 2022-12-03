@@ -1,10 +1,11 @@
 #!/bin/sh
 
-ENGINES="pogreb goleveldb bbolt badger bitcask archivedb"
+ENGINES="pogreb goleveldb bbolt badger bitcask archivedb flashdb buntdb"
 GOROUTINES="1 10"
 
 go build
 
+echo "Engine,Concurrency,Number of keys, Key Size, Value Size,Write/s,Reads/s,Size (MB),Time (sec)" > results.csv
 for goroutines in ${GOROUTINES}; do
   for engine in ${ENGINES}; do
     echo "Benchmarking ${engine} with ${goroutines} threads ..."

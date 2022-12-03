@@ -10,7 +10,7 @@ type bitcaskEngine struct {
 }
 
 func newBitcask(path string) (kvEngine, error) {
-	db, err := bitcask.Open(path)
+	db, err := bitcask.Open(path, bitcask.WithSync(false), bitcask.WithMaxDatafileSize(1<<30))
 	if err != nil {
 		return nil, err
 	}
