@@ -12,7 +12,7 @@ type goleveldbEngine struct {
 }
 
 func newGolevelDB(path string) (kvEngine, error) {
-	opts := opt.Options{Compression: opt.NoCompression}
+	opts := opt.Options{Compression: opt.NoCompression, NoSync: true}
 	db, err := leveldb.OpenFile(path, &opts)
 	if err != nil {
 		return nil, err

@@ -6,5 +6,5 @@ import (
 )
 
 func newPogreb(path string) (kvEngine, error) {
-	return pogreb.Open(path, &pogreb.Options{FileSystem: fs.OS})
+	return pogreb.Open(path, &pogreb.Options{FileSystem: fs.OS, BackgroundSyncInterval: 0})
 }

@@ -13,7 +13,7 @@ func newFlashDB(path string) (kvEngine, error) {
 	opts := flashdb.DefaultConfig()
 	opts.EvictionInterval = 0
 	opts.Path = path
-	opts.NoSync = false
+	opts.NoSync = true
 
 	db, err := flashdb.New(opts)
 	if err != nil {

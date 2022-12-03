@@ -6,6 +6,7 @@ import (
 
 func newBadger(path string) (kvEngine, error) {
 	opts := badger.DefaultOptions(path)
+	opts.SyncWrites = false
 	db, err := badger.Open(opts)
 	return &badgerEngine{db: db, path: path}, err
 }

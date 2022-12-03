@@ -12,7 +12,7 @@ type bboltEngine struct {
 }
 
 func newBbolt(path string) (kvEngine, error) {
-	db, err := bbolt.Open(path, 0600, nil)
+	db, err := bbolt.Open(path, 0600, &bbolt.Options{NoSync: true})
 	if err != nil {
 		return nil, err
 	}
