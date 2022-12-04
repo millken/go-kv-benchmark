@@ -12,6 +12,7 @@ require (
 	github.com/pkg/profile v1.7.0
 	github.com/syndtr/goleveldb v1.0.0
 	github.com/tidwall/buntdb v1.2.8
+	github.com/xujiajun/nutsdb v0.11.1
 	go.etcd.io/bbolt v1.3.6
 )
 
@@ -22,6 +23,7 @@ require (
 	github.com/arriqaaq/hash v0.1.2 // indirect
 	github.com/arriqaaq/set v0.1.2 // indirect
 	github.com/arriqaaq/zset v0.1.2 // indirect
+	github.com/bwmarrin/snowflake v0.3.0 // indirect
 	github.com/cespare/xxhash v1.1.0 // indirect
 	github.com/cespare/xxhash/v2 v2.1.2 // indirect
 	github.com/dgraph-io/ristretto v0.1.1 // indirect
@@ -45,6 +47,8 @@ require (
 	github.com/tidwall/pretty v1.2.0 // indirect
 	github.com/tidwall/rtred v0.1.2 // indirect
 	github.com/tidwall/tinyqueue v0.1.1 // indirect
+	github.com/xujiajun/mmap-go v1.0.1 // indirect
+	github.com/xujiajun/utils v0.0.0-20220904132955-5f7c5b914235 // indirect
 	go.opencensus.io v0.23.0 // indirect
 	golang.org/x/exp v0.0.0-20200228211341-fcea875c7e85 // indirect
 	golang.org/x/net v0.0.0-20210405180319-a5a99cb37ef4 // indirect

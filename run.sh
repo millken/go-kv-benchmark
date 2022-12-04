@@ -1,6 +1,6 @@
 #!/bin/sh
 
-ENGINES="pogreb goleveldb bbolt badger bitcask archivedb flashdb buntdb"
+ENGINES="pogreb goleveldb bbolt badger bitcask archivedb flashdb buntdb nutsdb"
 GOROUTINES="1 10"
 
 go build
