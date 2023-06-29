@@ -25,6 +25,7 @@ var engines = map[string]engineCtr{
 	"flashdb":   newFlashDB,
 	"buntdb":    newBuntDB,
 	"nutsdb":    newNutsDB,
+	"godb":      newGoDB,
 }
 
 func getEngineCtr(name string) (engineCtr, error) {
