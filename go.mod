@@ -8,7 +8,7 @@ require (
 	github.com/arriqaaq/flashdb v0.1.6
 	github.com/dgraph-io/badger/v3 v3.2103.4
 	github.com/millken/archivedb v0.0.1
-	github.com/millken/godb v0.0.0-20230628143604-a52469384e4f
+	github.com/millken/godb v0.0.0-20230629012919-2335fd804b5e
 	github.com/pkg/errors v0.9.1
 	github.com/pkg/profile v1.7.0
 	github.com/syndtr/goleveldb v1.0.0
@@ -59,4 +59,4 @@ require (
 	google.golang.org/protobuf v1.26.0 // indirect
 )
 
-replace github.com/millken/archivedb => /Users/millken/github.com/millken/archivedb
+//replace github.com/millken/archivedb => /Users/millken/github.com/millken/archivedb
