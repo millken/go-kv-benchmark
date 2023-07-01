@@ -38,7 +38,7 @@ func main() {
 		return
 	}
 
-	err := os.MkdirAll(*dir, 0755)
+	err := os.MkdirAll(*dir, 0666)
 	if err != nil {
 		fmt.Fprintln(os.Stderr, err)
 		os.Exit(1)
