@@ -7,7 +7,7 @@ go build
 mkdir -p ./tmp
 rm -rf ./tmp/*
 # Run the benchmark for each engine and goroutine count
-echo "Engine,Concurrency,Number of keys, Key Size, Value Size,Write/s,Reads/s,Size (MB),Time (sec)" > results.csv
+echo "Engine,Concurrency,Number of keys, Key Size, Value Size,Write/s,Reads/s,Size,Time (sec)" > results.csv
 for goroutines in ${GOROUTINES}; do
   for engine in ${ENGINES}; do
     echo "Benchmarking ${engine} with ${goroutines} threads ..."

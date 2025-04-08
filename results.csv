@@ -1,4 +1,4 @@
-Engine,Concurrency,Number of keys, Key Size, Value Size,Write/s,Reads/s,Size (MB),Time (sec)
+Engine,Concurrency,Number of keys, Key Size, Value Size,Write/s,Reads/s,Size,Time (sec)
 pogreb,1,100000,16~64,128~512,127434,528534,37.80MB,0.974
 goleveldb,1,100000,16~64,128~512,298758,290917,35.57MB,0.678
 bbolt,1,100000,16~64,128~512,33137,864519,64.05MB,3.133
