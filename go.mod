@@ -38,6 +38,7 @@ require (
 	github.com/dgryski/go-farm v0.0.0-20240924180020-3414d57e47da // indirect
 	github.com/dustin/go-humanize v1.0.1 // indirect
 	github.com/felixge/fgprof v0.9.3 // indirect
+	github.com/go-mmap/mmap v0.7.0 // indirect
 	github.com/gofrs/flock v0.8.1 // indirect
 	github.com/gogo/protobuf v1.3.2 // indirect
 	github.com/golang/glog v0.0.0-20160126235308-23def4e6c14b // indirect
@@ -51,6 +52,7 @@ require (
 	github.com/klauspost/cpuid v1.2.1 // indirect
 	github.com/kr/pretty v0.3.1 // indirect
 	github.com/matttproud/golang_protobuf_extensions v1.0.1 // indirect
+	github.com/millken/godb v0.0.0-20250408101643-0ec745c658ad // indirect
 	github.com/ncw/directio v1.0.4 // indirect
 	github.com/pingcap/errors v0.11.4 // indirect
 	github.com/pingcap/log v1.1.0 // indirect
@@ -69,6 +71,7 @@ require (
 	github.com/tidwall/pretty v1.2.0 // indirect
 	github.com/tidwall/rtred v0.1.2 // indirect
 	github.com/tidwall/tinyqueue v0.1.1 // indirect
+	github.com/valyala/bytebufferpool v1.0.0 // indirect
 	github.com/xujiajun/mmap-go v1.0.1 // indirect
 	github.com/xujiajun/utils v0.0.0-20220904132955-5f7c5b914235 // indirect
 	go.opencensus.io v0.23.0 // indirect
