@@ -35,7 +35,7 @@ func (db *flashdbEngine) Put(key []byte, value []byte) error {
 func (db *flashdbEngine) Get(key []byte) ([]byte, error) {
 	var val string
 	var err error
-	if err := db.db.View(
+	if err = db.db.View(
 		func(tx *flashdb.Tx) error {
 			if val, err = tx.Get(string(key)); err != nil {
 				return err

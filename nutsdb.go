@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/xujiajun/nutsdb"
+	"github.com/nutsdb/nutsdb"
 )
 
 type nutsdbEngine struct {
@@ -22,6 +22,15 @@ func newNutsDB(path string) (kvEngine, error) {
 	if err != nil {
 		return nil, err
 	}
+	err = db.Update(func(tx *nutsdb.Tx) error {
+		if err = tx.NewBucket(0, bucket001); err != nil {
+			return err
+		}
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
 	return &nutsdbEngine{db: db, path: path}, err
 }
 
@@ -38,9 +47,9 @@ func (db *nutsdbEngine) Put(key []byte, value []byte) error {
 }
 
 func (db *nutsdbEngine) Get(key []byte) ([]byte, error) {
-	var e *nutsdb.Entry
+	var e []byte
 	var err error
-	if err := db.db.View(
+	if err = db.db.View(
 		func(tx *nutsdb.Tx) error {
 			if e, err = tx.Get(bucket001, key); err != nil {
 				return err
@@ -49,7 +58,7 @@ func (db *nutsdbEngine) Get(key []byte) ([]byte, error) {
 		}); err != nil {
 		return nil, err
 	}
-	return e.Value, nil
+	return e, nil
 }
 
 func (db *nutsdbEngine) Close() error {
