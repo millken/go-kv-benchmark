@@ -17,13 +17,15 @@ func newNutsDB(path string) (kvEngine, error) {
 		nutsdb.DefaultOptions,
 		nutsdb.WithSyncEnable(false),
 		nutsdb.WithRWMode(nutsdb.MMap),
+		nutsdb.WithEntryIdxMode(nutsdb.HintKeyAndRAMIdxMode),
+		nutsdb.WithHintKeyAndRAMIdxCacheSize(0),
 		nutsdb.WithDir(path),
 	)
 	if err != nil {
 		return nil, err
 	}
 	err = db.Update(func(tx *nutsdb.Tx) error {
-		if err = tx.NewBucket(0, bucket001); err != nil {
+		if err = tx.NewKVBucket(bucket001); err != nil {
 			return err
 		}
 		return nil

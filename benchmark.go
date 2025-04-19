@@ -3,7 +3,7 @@ package main
 import (
 	"errors"
 	"fmt"
-	"math/rand"
+	"math/rand/v2"
 	"os"
 	"path"
 	"runtime"
@@ -12,16 +12,16 @@ import (
 )
 
 func randKey(minL int, maxL int) string {
-	n := rand.Intn(maxL-minL+1) + minL
+	n := rand.IntN(maxL-minL+1) + minL
 	buf := make([]byte, n)
-	for i := 0; i < n; i++ {
-		buf[i] = byte(rand.Intn(25) + 65)
+	for i := range n {
+		buf[i] = byte(rand.IntN(25) + 65)
 	}
 	return string(buf)
 }
 
-func randValue(rnd *rand.Rand, src []byte, minS int, maxS int) []byte {
-	n := rnd.Intn(maxS-minS+1) + minS
+func randValue(src []byte, minS int, maxS int) []byte {
+	n := rand.IntN(maxS-minS+1) + minS
 	return src[:n]
 }
 
@@ -32,7 +32,7 @@ func forceGC() {
 
 func shuffle(a [][]byte) {
 	for i := len(a) - 1; i > 0; i-- {
-		j := rand.Intn(i + 1)
+		j := rand.IntN(i + 1)
 		a[i], a[j] = a[j], a[i]
 	}
 }
@@ -56,12 +56,9 @@ func concurrentBatch(keys [][]byte, concurrency int, cb func(gid int, batch [][]
 	batchSize := len(keys) / concurrency
 	wg.Add(concurrency)
 	var err error
-	for i := 0; i < concurrency; i++ {
+	for i := range concurrency {
 		batchStart := i * batchSize
-		batchEnd := (i + 1) * batchSize
-		if batchEnd > len(keys) {
-			batchEnd = len(keys)
-		}
+		batchEnd := min((i+1)*batchSize, len(keys))
 		go func(gid int, batch [][]byte) {
 			err = cb(gid, batch)
 			wg.Done()
@@ -97,16 +94,15 @@ func benchmark(engine string, dir string, numKeys int, minKS int, maxKS int, min
 
 	keys := generateKeys(numKeys, minKS, maxKS)
 	valSrc := make([]byte, maxVS)
-	if _, err := rand.Read(valSrc); err != nil {
-		return err
+	for i := range valSrc {
+		valSrc[i] = byte(rand.IntN(255))
 	}
 	forceGC()
 
 	start := time.Now()
 	err = concurrentBatch(keys, concurrency, func(gid int, batch [][]byte) error {
-		rnd := rand.New(rand.NewSource(int64(rand.Uint64())))
 		for i, k := range batch {
-			if err := db.Put(k, randValue(rnd, valSrc, minVS, maxVS)); err != nil {
+			if err = db.Put(k, randValue(valSrc, minVS, maxVS)); err != nil {
 				return err
 			}
 			if progress {
@@ -118,7 +114,7 @@ func benchmark(engine string, dir string, numKeys int, minKS int, maxKS int, min
 	if err != nil {
 		return err
 	}
-	if err := db.Close(); err != nil {
+	if err = db.Close(); err != nil {
 		return err
 	}
 	endsecs := time.Since(start).Seconds()

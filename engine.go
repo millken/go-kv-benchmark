@@ -16,18 +16,16 @@ type kvEngine interface {
 type engineCtr func(string) (kvEngine, error)
 
 var engines = map[string]engineCtr{
-	"pogreb":        newPogreb,
-	"goleveldb":     newGolevelDB,
-	"bbolt":         newBbolt,
-	"badger":        newBadger,
-	"pingcapbadger": newPingcapBadger,
-	"bitcask":       newBitcask,
-	"archivedb":     newArchiveDB,
-	"flashdb":       newFlashDB,
-	"buntdb":        newBuntDB,
-	"nutsdb":        newNutsDB,
-	"godb":          newGoDB,
-	"lmdb":          newLmdb,
+	"pogreb":    newPogreb,
+	"goleveldb": newGolevelDB,
+	"bbolt":     newBbolt,
+	"badger":    newBadger,
+	"bitcask":   newBitcask,
+	"archivedb": newArchiveDB,
+	"flashdb":   newFlashDB,
+	"buntdb":    newBuntDB,
+	"nutsdb":    newNutsDB,
+	"godb":      newGoDB,
 }
 
 func getEngineCtr(name string) (engineCtr, error) {

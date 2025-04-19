@@ -15,6 +15,9 @@ func newBuntDB(path string) (kvEngine, error) {
 	if err != nil {
 		return nil, err
 	}
+	db.SetConfig(buntdb.Config{
+		SyncPolicy: buntdb.Never,
+	})
 	return &buntdbEngine{db: db, path: path}, err
 }
 
